@@ -5,6 +5,7 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class BasicCache(BaseCaching):
     """Child class inherit of class BaseCaching that defines:
+
     - constants of your caching system
     - where your data are stored (in a dictionary)"""
 
@@ -25,4 +26,3 @@ class BasicCache(BaseCaching):
             return
         else:
             return self.cache_data[key]
-
