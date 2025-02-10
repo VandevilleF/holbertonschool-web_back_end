@@ -5,6 +5,8 @@ filtered_logger module.
 import re
 from typing import List
 import logging
+import os
+import mysql.connector
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -33,19 +35,6 @@ class RedactingFormatter(logging.Formatter):
         return super().format(record)
 
 
-def get_logger() -> logging.Logger:
-    """ Returns a logging.Logger object."""
-    logger = logging.getLogger("user_data")
-    logger.setLevel(logging.INFO)
-    logger.propagate = False
-
-    handler = logging.StreamHandler()
-    handler.setFormatter(RedactingFormatter(PII_FIELDS))
-
-    logger.addHandler(handler)
-    return logger
-
-
 def filter_datum(
     fields: List[str],
     redaction: str,
@@ -72,3 +61,31 @@ def filter_datum(
             rf'{field}=[^{separator}]*', f'{field}={redaction}', message
         )
     return message
+
+
+def get_logger() -> logging.Logger:
+    """ Returns a logging.Logger object."""
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+
+    handler = logging.StreamHandler()
+    handler.setFormatter(RedactingFormatter(PII_FIELDS))
+
+    logger.addHandler(handler)
+    return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Return a connector to the database"""
+    try:
+        return mysql.connector.connect(
+            host=os.getenv("PERSONAL_DATA_DB_HOST", "localhost"),
+            database=os.getenv("PERSONAL_DATA_DB_NAME", "my_db"),
+            user=os.getenv("PERSONAL_DATA_DB_USERNAME", "root"),
+            password=os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+        )
+    except mysql.connector.Error as err:
+        logger = get_logger()
+        logger.error(f"Database connection failed: {err}")
+        return None
