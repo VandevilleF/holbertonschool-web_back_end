@@ -75,7 +75,7 @@ class BasicAuth(Auth):
 
         try:
             users = User.search({"email": user_email})
-        except (AttributeError, TypeError) as e:
+        except Exception:
             return None
         if not users:
             return None
