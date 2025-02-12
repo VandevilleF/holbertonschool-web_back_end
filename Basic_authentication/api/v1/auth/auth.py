@@ -14,9 +14,15 @@ class Auth():
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Return:
-            - False
-            """
-        return False
+            - False or True if the path is not in the list of strings
+        """
+        if path is None or not excluded_paths:
+            return True
+
+        if not path.endswith('/'):
+            path += '/'
+
+        return path not in excluded_paths
 
     def authorization_header(self, request=None) -> str:
         """ Return:
@@ -27,5 +33,5 @@ class Auth():
     def current_user(self, request=None) -> TypeVar('User'):
         """ Return:
             - None
-            """
+        """
         return None
