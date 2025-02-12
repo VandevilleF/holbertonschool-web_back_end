@@ -4,3 +4,4 @@
 /api/v1/auth/__pycache__
 /models/__pycache__
 *main*
+*.json
