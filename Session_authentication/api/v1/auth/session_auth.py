@@ -46,12 +46,8 @@ class SessionAuth(Auth):
             return None
 
         user_id = self.user_id_for_session_id(session_id)
-        print("User ID trouvé:", user_id)
 
         if user_id is None:
             return None
 
-        user = User.get(user_id)
-        print("Utilisateur trouvé:", user)
-
-        return user
+        return User.get(user_id)
