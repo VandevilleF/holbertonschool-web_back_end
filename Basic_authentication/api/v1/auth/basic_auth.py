@@ -91,7 +91,7 @@ class BasicAuth(Auth):
         """ that overloads Auth and retrieves
         the User instance for a request
         """
-        header = Auth.authorization_header(request)
+        header = self.authorization_header(request)
         if header is None:
             return None
 
