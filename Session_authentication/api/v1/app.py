@@ -28,20 +28,26 @@ if os.getenv('AUTH_TYPE') == "session_auth":
 def before_request():
     """ Request before all
     """
-    if (auth is None):
+    if auth is None:
         return
-    if (not auth.require_auth(
+    if not auth.require_auth(
         request.path,
-        ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
-    )):
+        ['/api/v1/status/',
+         '/api/v1/unauthorized/',
+         '/api/v1/forbidden/',
+         "/api/v1/auth_session/login/"]
+    ):
         return
-    if (auth.authorization_header(request) is None):
+    if (
+        auth.authorization_header(request) is None
+        and auth.session_cookie(request) is None
+    ):
         abort(401)
 
-    request.current_user = auth.current_user(request)
-
-    if (auth.current_user(request) is None):
+    if auth.current_user(request) is None:
         abort(403)
+
+        request.current_user = auth.current_user(request)
 
 
 @app.errorhandler(404)
