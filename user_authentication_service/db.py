@@ -42,7 +42,7 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs: Dict[str, Any]) -> User:
+    def find_user_by(self, **kwargs):
         """Returns the first row found in the users table
         as filtered by the methods input arguments."""
         try:
