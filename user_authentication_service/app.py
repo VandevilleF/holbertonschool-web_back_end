@@ -17,14 +17,14 @@ def welcome():
 
 
 @app.route("/users", methods=["POST"], strict_slashes=False)
-def users():
+def users() -> str:
     """ POST /users/
     JSON body:
-    - email
-    - password
+      - email
+      - password
     Return:
-    - User object JSON represented
-    - 400 if can't create the new User
+      - User object JSON represented
+      - 400 if can't create the new User
     """
     email = request.form.get('email')
     pwd = request.form.get('password')
