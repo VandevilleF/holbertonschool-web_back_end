@@ -46,13 +46,13 @@ class DB:
         """Returns the first row found in the users table
         as filtered by the methods input arguments."""
         try:
-            user = self._session.query(User).filter_by(**kwargs).first()
+            user = self._session.query(User).filter_by(**kwargs).one()
 
             if user is None:
                 raise NoResultFound
             return user
 
-        except NoResultFound:
-            raise NoResultFound
-        except InvalidRequestError:
-            raise InvalidRequestError
+        except NoResultFound as e:
+            raise e
+        except InvalidRequestError as e:
+            raise e
