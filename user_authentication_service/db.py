@@ -52,7 +52,7 @@ class DB:
                 raise NoResultFound
             return user
 
-        except NoResultFound as e:
-            raise e
-        except InvalidRequestError as e:
-            raise e
+        except NoResultFound:
+            raise NoResultFound
+        except InvalidRequestError:
+            raise InvalidRequestError
