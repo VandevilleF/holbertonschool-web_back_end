@@ -63,3 +63,5 @@ class DB:
             if not user_att:
                 raise ValueError
             setattr(user, key, value)
+
+        self._session.commit()
