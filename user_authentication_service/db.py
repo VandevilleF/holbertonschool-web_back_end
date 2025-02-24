@@ -47,9 +47,6 @@ class DB:
         as filtered by the methods input arguments."""
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
-
-            if user is None:
-                raise NoResultFound
             return user
 
         except NoResultFound:
