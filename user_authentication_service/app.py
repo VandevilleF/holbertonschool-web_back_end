@@ -61,6 +61,7 @@ def login() -> str:
     session_id = AUTH.create_session(email)
     response = make_response(jsonify({"email": email, "message": "logged in"}))
     response.set_cookie("session_id", session_id)
+    print(session_id)
 
     return response
 
@@ -82,7 +83,7 @@ def logout() -> None:
     if not user:
         abort(403)
 
-    AUTH.destroy_session(user)
+    AUTH.destroy_session(user.id)
 
     return redirect('/')
 
