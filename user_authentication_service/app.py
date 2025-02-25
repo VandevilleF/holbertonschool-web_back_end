@@ -85,7 +85,10 @@ def logout() -> None:
 
     AUTH.destroy_session(user.id)
 
-    return redirect('/')
+    response = make_response(redirect('/'))
+    response.delete_cookie('session_id')
+
+    return response
 
 
 if __name__ == "__main__":
