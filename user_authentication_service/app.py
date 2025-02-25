@@ -66,14 +66,10 @@ def login() -> str:
     return response
 
 
-@app.route('/sessions', methods=["DELETE"], strict_slashes=False)
-def logout() -> str:
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout_user() -> str:
     """ DELETE /sessions/
-    JSON body:
-      - session_id
-    Returns:
-      - redirect the user to GET /
-      - If the user does not exist, 403 status
+    Removes the user session
     """
     session_id = request.cookies.get('session_id')
 
