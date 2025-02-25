@@ -76,10 +76,12 @@ def logout() -> str:
       - If the user does not exist, 403 status
     """
     session_id = request.cookies.get('session_id')
+
     if session_id is None:
         abort(403)
 
     user = AUTH.get_user_from_session_id(session_id)
+
     if user is None:
         abort(403)
 
@@ -87,7 +89,6 @@ def logout() -> str:
 
     response = make_response(redirect('/'))
     response.delete_cookie('session_id')
-
     return response
 
 
