@@ -67,7 +67,7 @@ def login() -> str:
 
 
 @app.route('/sessions', methods=["DELETE"], strict_slashes=False)
-def logout() -> None:
+def logout() -> str:
     """ DELETE /sessions/
     JSON body:
       - session_id
