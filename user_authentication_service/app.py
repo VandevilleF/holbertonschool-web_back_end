@@ -61,7 +61,6 @@ def login() -> str:
     session_id = AUTH.create_session(email)
     response = make_response(jsonify({"email": email, "message": "logged in"}))
     response.set_cookie("session_id", session_id)
-    print(session_id)
 
     return response
 
@@ -86,6 +85,25 @@ def logout_user() -> str:
     response = make_response(redirect('/'))
     response.delete_cookie('session_id')
     return response
+
+
+@app.route('/profile', strict_slashes=False)
+def find_user():
+    """ GET /profile/
+    JSON body:
+      - session_id
+    Return:
+      - A JSON payload status code 200
+    """
+    session_id = request.cookies.get('session_id')
+    if session_id is None:
+        abort(403)
+
+    user = AUTH.get_user_from_session_id(session_id)
+    if user is None:
+        abort(403)
+
+    return jsonify({"email": f"{user.email}"}), 200
 
 
 if __name__ == "__main__":
