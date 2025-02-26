@@ -103,7 +103,28 @@ def find_user():
     if user is None:
         abort(403)
 
-    return jsonify({"email": f"{user.email}"}), 200
+    return jsonify({"email": user.email}), 200
+
+
+@app.route('/reset_password', methods=["POST"], strict_slashes=False)
+def get_reset_password_token():
+    """ POST /reset_password/
+    JSON body:
+        email
+    Returns:
+        JSON payload (email, token) of the user
+        abort 403 if the email is not registered
+    """
+    email = request.form.get('email')
+    if email is None:
+        abort(401)
+
+    try:
+        token = AUTH.get_reset_password_token(email=email)
+        return jsonify({"email": email, "reset_token": token})
+
+    except ValueError:
+        abort(403)
 
 
 if __name__ == "__main__":
