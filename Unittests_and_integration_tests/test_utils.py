@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+""" File test for utils
+"""
 import unittest
 from unittest.mock import Mock, patch
 from utils import access_nested_map, get_json, memoize
@@ -23,6 +25,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",)),
         ({"a": 1}, ("a", "b"))
     ])
+    
     def test_access_nested_map_exception(self, nested_map, path):
         """ Test that a KeyError is raised
         """
@@ -38,6 +41,7 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False})
     ])
     @patch("utils.requests.get")
+
     def test_get_json(self, test_url, test_payload, mock_requests):
         """ Test that utils.get_json returns the expected result
         """
