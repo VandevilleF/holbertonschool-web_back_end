@@ -2,7 +2,7 @@
 """ File test for utils
 """
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 
@@ -15,7 +15,6 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
-
     def test_access_nested_map(self, nested_map, path, expected):
         """ Test for access_nested_map
         """
@@ -25,7 +24,6 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",)),
         ({"a": 1}, ("a", "b"))
     ])
-    
     def test_access_nested_map_exception(self, nested_map, path):
         """ Test that a KeyError is raised
         """
@@ -41,7 +39,6 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False})
     ])
     @patch("utils.requests.get")
-
     def test_get_json(self, test_url, test_payload, mock_requests):
         """ Test that utils.get_json returns the expected result
         """
@@ -74,8 +71,8 @@ class TestMemoize(unittest.TestCase):
                 """
                 return self.a_method()
 
-        with patch.object(
-            TestClass, 'a_method', return_value=42) as mock_method:
+        with patch.object(TestClass,
+                          'a_method', return_value=42) as mock_method:
             mock = TestClass()
             self.assertEqual(mock.a_property, 42)
             self.assertEqual(mock.a_property, 42)
