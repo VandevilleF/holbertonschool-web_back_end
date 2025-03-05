@@ -31,7 +31,6 @@ def before_request():
     """ Before request
     """
     g.user = get_user()
-    print("DEBUG: g.user = ", g.user) 
 
 
 def get_user():
