@@ -3,18 +3,19 @@
 """
 import uuid
 import redis
+from typing import Union
 
 
 class Cache():
     """ Cache class
     """
     def __init__(self):
-        """ Initialize of class Cache
+        """ Initialize the Cache instance
         """
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(self, data):
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """ Store method, generate a random key,
         store the input data in Redis using the random key
         Returns
