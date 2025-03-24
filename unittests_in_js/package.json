@@ -6,7 +6,8 @@
   },
   "dependencies": {
     "chai": "^5.2.0",
-    "mocha": "^11.1.0"
+    "mocha": "^11.1.0",
+    "sinon": "^19.0.4"
   },
   "description": "Unittests in JS ===============",
   "main": "0-calcul.js",
