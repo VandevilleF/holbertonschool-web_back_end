@@ -1,9 +1,10 @@
 {
-  "type": "module",
-  "dependencies": {
-    "mocha": "^11.1.0"
-  },
+  "name": "integration-test-js",
+  "version": "1.0.0",
   "scripts": {
     "test": "mocha"
+  },
+  "dependencies": {
+    "mocha": "^11.1.0"
   }
 }
