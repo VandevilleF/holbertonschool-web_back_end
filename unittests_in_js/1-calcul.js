@@ -1,12 +1,14 @@
 function calculateNumber(type, a, b) {
+  const num1 = Math.round(a)
+  const num2 = Math.round(b)
   switch(type) {
     case 'SUM':
-      return Math.round(a) + Math.round(b);
+      return num1 + num2;
     case 'SUBTRACT':
-      return Math.round(a) - Math.round(b);
+      return num1 - num2;
     case 'DIVIDE':
-      if (b != 0) {
-        return Math.round(a) / Math.round(b);
+      if (num2 != 0) {
+        return num1 / num2;
       }
       return ("Error")
   }
