@@ -23,6 +23,10 @@ describe("calculateNumber", function() {
   });
 
   it("When type is DIVIDE, round the two numbers, and divide a with b - if the rounded value of b is equal to 0, return the string Error", function() {
+    assert.equal(calculateNumber('DIVIDE', 0, 4.5), 0);
+  });
+
+  it("When type is DIVIDE, round the two numbers, and divide a with b - if the rounded value of b is equal to 0, return the string Error", function() {
     assert.equal(calculateNumber('DIVIDE', 1.4, 0), 'Error');
   });
 });
