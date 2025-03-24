@@ -8,6 +8,5 @@ describe("getPaymentTokenFromAPI", function () {
       expect(response).to.equal({data: 'Successful response from the API' });
       done();
     })
-    .catch(done);
   });
 });
