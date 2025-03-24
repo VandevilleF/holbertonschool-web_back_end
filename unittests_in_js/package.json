@@ -1,10 +1,16 @@
 {
-  "name": "integration-test-js",
+  "name": "integration-test",
   "version": "1.0.0",
   "scripts": {
     "test": "mocha"
   },
   "dependencies": {
     "mocha": "^11.1.0"
-  }
+  },
+  "description": "Unittests in JS ===============",
+  "main": "0-calcul.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
