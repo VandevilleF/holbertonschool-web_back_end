@@ -5,11 +5,11 @@
     "test": "mocha"
   },
   "dependencies": {
+    "chai": "^5.2.0",
     "mocha": "^11.1.0"
   },
   "description": "Unittests in JS ===============",
   "main": "0-calcul.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC"
