@@ -9,6 +9,12 @@ describe('GET /', () => {
   it('respond with the message Welcome to the payment system', function (done) {
     request.get(`${url}/`, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
+      done();
+    });
+  });
+
+  it('respond with the message Welcome to the payment system', function (done) {
+    request.get(`${url}/`, (err, res, body) => {
       expect(body).to.equal('Welcome to the payment system');
       done();
     });
@@ -16,9 +22,15 @@ describe('GET /', () => {
 });
 
 describe('GET /cart/:id', () => {
-  it('return Payment methods for cart :id', function (done) {
+  it('return status 200 for Payment methods for cart 12', function (done) {
     request.get(`${url}/cart/12`, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
+      done();
+    });
+  });
+
+  it('return Payment methods for cart 12', function (done) {
+    request.get(`${url}/cart/12`, (err, res, body) => {
       expect(body).to.equal('Payment methods for cart 12');
       done();
     });
@@ -32,7 +44,6 @@ describe('GET /cart/:id', () => {
   });
 });
 
-// Arrêter le serveur après les tests
 after(() => {
   server.close();
 });
