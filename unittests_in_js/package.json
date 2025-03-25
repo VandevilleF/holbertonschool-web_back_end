@@ -6,8 +6,11 @@
   },
   "dependencies": {
     "chai": "^5.2.0",
+    "chai-http": "^5.1.1",
+    "express": "^4.21.2",
     "mocha": "^11.1.0",
-    "sinon": "^19.0.4"
+    "sinon": "^19.0.4",
+    "supertest": "^7.1.0"
   },
   "description": "Unittests in JS ===============",
   "main": "0-calcul.js",
