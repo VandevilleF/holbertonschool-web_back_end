@@ -8,8 +8,12 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(port, () => {
-  console.log(`API available on localhost port ${port}`)
-});
+if (require.main === module) {
+  const PORT = 7865;
+  app.listen(PORT, () => {
+    console.log(`API available on localhost port ${PORT}`);
+  });
+}
+
 
 module.exports = app;
