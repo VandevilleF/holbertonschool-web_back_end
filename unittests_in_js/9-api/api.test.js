@@ -2,48 +2,50 @@ const expect = require('chai').expect;
 const request = require('request');
 const app = require('./api');
 
-const server = app.listen(7865, () => console.log('Test server running on port 7865'));
-const url = 'http://localhost:7865';
+let server;
+const baseURL = 'http://localhost:7865';
 
-describe('GET /', () => {
-  it('respond with the message Welcome to the payment system', function (done) {
-    request.get(`${url}/`, (err, res, body) => {
-      expect(res.statusCode).to.equal(200);
-      done();
-    });
+describe('API GET /', () => {
+  before(function (done) {
+    server = app.listen(7865, done);
+  });
+
+  after(function (done) {
+    server.close(done);
   });
 
   it('respond with the message Welcome to the payment system', function (done) {
-    request.get(`${url}/`, (err, res, body) => {
+    request.get(`${baseURL}/`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      done();
+    })
+  });
+
+  it('respond with the message Welcome to the payment system', function (done) {
+    request.get(`${baseURL}/`, (err, res, body) => {
       expect(body).to.equal('Welcome to the payment system');
       done();
-    });
+    })
   });
-});
-
-describe('GET /cart/:id', () => {
-  it('return status 200 for Payment methods for cart 12', function (done) {
-    request.get(`${url}/cart/12`, (err, res, body) => {
+  it('responds with 200 for a valid cart ID', function (done) {
+    request.get(`${baseURL}/cart/12`, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
       done();
     });
   });
 
-  it('return Payment methods for cart 12', function (done) {
-    request.get(`${url}/cart/12`, (err, res, body) => {
+  it('responds with 200 for a valid cart ID', function (done) {
+    request.get(`${baseURL}/cart/12`, (err, res, body) => {
       expect(body).to.equal('Payment methods for cart 12');
       done();
     });
   });
 
-  it('return 404 when id is not a number', function (done) {
-    request.get(`${url}/cart/hello`, (err, res, body) => {
+  it('responds with 404 for an invalid cart ID not an number', function (done) {
+    request.get(`${baseURL}/cart/hello`, (err, res, body) => {
       expect(res.statusCode).to.equal(404);
       done();
     });
   });
 });
 
-after(() => {
-  server.close();
-});

@@ -6,12 +6,10 @@ app.get('/', (req, res) => {
   res.status(200).send('Welcome to the payment system')
 });
 
-app.get('/cart/:id', (req, res) => {
-  if (isNaN(req.params.id)) {
-    return res.status(404).send('Cart not found');
-  }
-  res.status(200).send(`Payment methods for cart ${req.params.id}`);
-})
+app.get('/cart/:id(\\d+)', (req, res) => {
+  const cart_id = req.params.id;
+  res.status(200).send(`Payment methods for cart ${cart_id}`);
+});
 
 if (require.main === module) {
   const PORT = 7865;
@@ -19,6 +17,5 @@ if (require.main === module) {
     console.log(`API available on localhost port ${PORT}`);
   });
 }
-
 
 module.exports = app;
