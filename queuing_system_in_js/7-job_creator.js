@@ -1,4 +1,3 @@
-const e = require('express');
 const kue = require('kue');
 const queue = kue.createQueue();
 
@@ -61,7 +60,7 @@ for (const data of jobs) {
     console.log(`Notification job ${job.id} completed`)
   });
 
-  job.on('failed', () => {
+  job.on('failed', (err) => {
     console.log(`Notification job ${job.id} failed: ${err}`)
   });
 
