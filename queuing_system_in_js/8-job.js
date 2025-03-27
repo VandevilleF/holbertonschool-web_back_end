@@ -21,5 +21,3 @@ export default function createPushNotificationsJobs(jobs, queue) {
     })
   });
 }
-
-
